@@ -17,8 +17,8 @@ public class User implements Serializable {
     private String name;
     private String email;
 
-//    @DBRef(lazy = true)
-//    private List<Post> posts = new ArrayList<>();
+    @DBRef(lazy = true)
+    private List<Post> posts = new ArrayList<>();
 
     public User() {
     }
@@ -54,13 +54,13 @@ public class User implements Serializable {
         this.email = email;
     }
 
-//    public List<Post> getPosts() {
-//        return posts;
-//    }
-//
-//    public void setPosts(List<Post> posts) {
-//        this.posts = posts;
-//    }
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
 
     @Override
     public int hashCode() {
@@ -80,10 +80,7 @@ public class User implements Serializable {
             return false;
         User other = (User) obj;
         if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
+            return other.id == null;
+        } else return id.equals(other.id);
     }
 }
